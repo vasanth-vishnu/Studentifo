@@ -79,7 +79,13 @@ const useStyles = makeStyles((theme) => ({
   },
   ul1:{
       position:'absolute',
-      top:'27%'
+      top:'27%',
+      
+  },
+  ul2:{
+    textAlign:'center',
+    width:'100%',
+   
   },
   ng: {
       textAlign:'center',
@@ -91,6 +97,11 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(2, 0, 2),
+  },
+  tit: {
+    backgroundColor:'#10AFA6',
+      color:'white',
+      width:'100%'
   },
 
 }));
@@ -132,11 +143,34 @@ export default function Register() {
           marginTop:'-60px'
       }}>
         <div className={classes.paper}>
-            <div className="tit">
-                <h2 style={{
-                    color:'#008880'
-                }}>Studentifo</h2>
-            </div>
+        <div className={classes.ul2}>
+        <ul style={{
+              display:'flex',
+             textAlign:'center',
+             
+          }}>
+              <li style={{
+                  marginTop:'10px',
+                  
+                  backgroundColor:'#10AFA6',
+                  padding:'10px',
+                  borderRadius:'100%'
+              }}><img src="/lg1.png" alt="" srcset="" height="50px" width="50px" /></li>
+              <li><h1 style={{
+                       color:'#10AFA6',
+                       fontFamily:'poppins',
+                        fontSize:'30px',
+                        width:'100%',
+                        position:'relative',
+                        left:'20px',
+                        top:'15px'
+                       
+                        
+                       }}>Studentifo<span style={{fontSize:'25px',color:'#10AFA6',opacity:'0.7',fontFamily:'Roboto'}}> Make It easy</span></h1>
+                    </li>
+          </ul>  
+        </div>
+            
           <Avatar className={classes.avatar}>
             <VpnKeyOutlinedIcon style={{
                 color:'white',

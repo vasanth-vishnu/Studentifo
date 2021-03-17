@@ -80,6 +80,11 @@ const useStyles = makeStyles((theme) => ({
       position:'absolute',
       top:'27%'
   },
+  ul2:{
+    textAlign:'center',
+    width:'100%',
+   
+  },
   ng: {
       textAlign:'center',
       backgroundColor:'green',
@@ -128,11 +133,34 @@ export default function Body() {
       </Grid>
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-            <div className="tit">
-                <h2 style={{
-                    color:'#008880'
-                }}>Studentifo</h2>
-            </div>
+        <div className={classes.ul2}>
+        <ul style={{
+              display:'flex',
+             textAlign:'center',
+             
+          }}>
+              <li style={{
+                  
+                  
+                  backgroundColor:'#10AFA6',
+                  padding:'10px',
+                  borderRadius:'100%'
+              }}><img src="/lg1.png" alt="" srcset="" height="50px" width="50px" style={{position:'relative',top:'5px'}} /></li>
+              <li><h1 style={{
+                       color:'#10AFA6',
+                       fontFamily:'poppins',
+                        fontSize:'30px',
+                        width:'100%',
+                        position:'relative',
+                        left:'20px',
+                        
+                       
+                        
+                       }}>Studentifo <span style={{fontSize:'25px',color:'#10AFA6',opacity:'0.7',fontFamily:'Roboto'}}> Make It easy</span></h1>
+                    </li>
+          </ul>  
+        </div>
+            
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon style={{
                 color:'white',
