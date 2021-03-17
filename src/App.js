@@ -1,10 +1,12 @@
 
 import Body from './components/Body';
+import Register from './components/Register';
 
 function App() {
   return (
     <div className="App">
-      <Body/>
+      <Register/>
+     
     </div>
   );
 }

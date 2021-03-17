@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles,withStyles } from '@material-ui/core/styles';
 
@@ -94,7 +95,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function Body() {
+export default function Register() {
   const classes = useStyles();
 
   return (
@@ -126,7 +127,10 @@ export default function Body() {
           </ul>  
           </div>  
       </Grid>
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square
+      style={{
+          marginTop:'-60px'
+      }}>
         <div className={classes.paper}>
             <div className="tit">
                 <h2 style={{
@@ -134,7 +138,7 @@ export default function Body() {
                 }}>Studentifo</h2>
             </div>
           <Avatar className={classes.avatar}>
-            <LockOutlinedIcon style={{
+            <VpnKeyOutlinedIcon style={{
                 color:'white',
                 backgroundColor:'#10AFA6'
             }}/>
@@ -142,9 +146,18 @@ export default function Body() {
           <Typography component="h1" variant="h5" style={{
               color:'#10AFA6'
           }}>
-            Sign in
+            Sign Up
           </Typography>
           <form className={classes.form} noValidate>
+          <CssTextField
+              margin="normal"
+              label="Username"
+              variant="outlined"
+              required
+              fullWidth
+              id="username"
+              name="uname"
+            />
             <CssTextField
               margin="normal"
               label="Email Address"
@@ -154,8 +167,6 @@ export default function Body() {
               id="email"
               label="Email Address"
               name="email"
-              autoComplete="email"
-              autoFocus
             />
             <CssTextField
               variant="outlined"
@@ -164,6 +175,17 @@ export default function Body() {
               fullWidth
               name="password"
               label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+             <CssTextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Conform-Password"
               type="password"
               id="password"
               autoComplete="current-password"
@@ -179,21 +201,14 @@ export default function Body() {
               style={{backgroundColor:'#10AFA6',color:'white'}}
               className={classes.submit}
             >
-              Sign In
+              Sign Up
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2" style={{
-                    color:'#008880'
-                }}>
-                  Forgot password?
-                </Link>
-              </Grid>
               <Grid item>
                 <Link href="#" variant="body2" style={{
                     color:'#008880'
                 }}>
-                  {"Don't have an account? Sign Up"}
+                  {"Already have an account? Sign In"}
                 </Link>
               </Grid>
             </Grid>
