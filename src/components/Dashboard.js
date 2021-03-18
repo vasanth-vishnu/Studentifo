@@ -208,8 +208,6 @@ export default function Dashboard() {
               
               </Paper>
             </Grid>
-            {/* Recent Orders */}
-            
           </Grid>
           <Box pt={4}>
             <Copyright />

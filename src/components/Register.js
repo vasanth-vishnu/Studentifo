@@ -9,11 +9,16 @@ import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles,withStyles } from '@material-ui/core/styles';
+import {useState} from 'react';
+import Alert from '@material-ui/lab/Alert';
+import {ToastContainer,toast,Zoom,Bounce} from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import { ZoomInRounded } from '@material-ui/icons';
 
+ 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -108,10 +113,31 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Register() {
   const classes = useStyles();
-
+  const [udetails,setUdetails]=useState({
+    name:"",
+    email:"",
+    pass:"",
+    cpass:""
+  });
+  const onSubmit=(e)=>{
+    e.preventDefault();
+    console.log("user registered");
+    console.log(e.target.uname.value);
+    console.log(e.target.email.value);
+    console.log(e.target.password.value);
+    console.log(e.target.cpassword.value);
+    if(e.target.password.value!== e.target.cpassword.value){
+       toast.error("Passwords doesn't match");
+    }
+    else{
+      toast.success("Registered successfully");
+    }
+  };
+  
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline/>
+      
       <Grid item xs={false} sm={4} md={7} className={classes.image}>
           <div className={classes.ul1}>
           <ul style={{
@@ -143,6 +169,7 @@ export default function Register() {
           marginTop:'-60px'
       }}>
         <div className={classes.paper}>
+       
         <div className={classes.ul2}>
         <ul style={{
               display:'flex',
@@ -170,7 +197,7 @@ export default function Register() {
                     </li>
           </ul>  
         </div>
-            
+         <ToastContainer autoClose={2000} position={toast.POSITION.TOP_CENTER}/>
           <Avatar className={classes.avatar}>
             <VpnKeyOutlinedIcon style={{
                 color:'white',
@@ -182,23 +209,25 @@ export default function Register() {
           }}>
             Sign Up
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} noValidate onSubmit={onSubmit}>
+         
           <CssTextField
               margin="normal"
               label="Username"
               variant="outlined"
               required
               fullWidth
-              id="username"
+            
               name="uname"
             />
+            
             <CssTextField
               margin="normal"
               label="Email Address"
               variant="outlined"
               required
               fullWidth
-              id="email"
+              
               label="Email Address"
               name="email"
             />
@@ -210,7 +239,7 @@ export default function Register() {
               name="password"
               label="Password"
               type="password"
-              id="password"
+              
               autoComplete="current-password"
             />
              <CssTextField
@@ -218,10 +247,10 @@ export default function Register() {
               margin="normal"
               required
               fullWidth
-              name="password"
+              name="cpassword"
               label="Conform-Password"
               type="password"
-              id="password"
+              
               autoComplete="current-password"
             />
             <FormControlLabel
@@ -239,7 +268,7 @@ export default function Register() {
             </Button>
             <Grid container>
               <Grid item>
-                <Link href="#" variant="body2" style={{
+                <Link href="/" variant="body2" style={{
                     color:'#008880'
                 }}>
                   {"Already have an account? Sign In"}
