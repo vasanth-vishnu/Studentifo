@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,11 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles,withStyles } from '@material-ui/core/styles';
+import axios from 'axios';
+import {ToastContainer,toast,Zoom,Bounce} from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import {useHistory} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -54,6 +59,9 @@ const useStyles = makeStyles((theme) => ({
   },
   image: {
     backgroundImage: 'url(../bg3.jpg)',
+    [theme.breakpoints.down('sm')]: {
+      display:'none'
+    },
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
@@ -78,7 +86,10 @@ const useStyles = makeStyles((theme) => ({
   },
   ul1:{
       position:'absolute',
-      top:'27%'
+      top:'27%',
+      [theme.breakpoints.down('sm')]: {
+        display:'none'
+      },
   },
   ul2:{
     textAlign:'center',
@@ -101,7 +112,52 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Body() {
   const classes = useStyles();
-
+  const [logus,setLogus]=useState({
+    email:"",
+    password:""
+  });
+  const handleChange=(e)=>{
+    const{name,value}=e.target;
+    setLogus((prevLogus)=>{
+      return {
+          ...prevLogus,
+          [name]:value
+      }
+    })
+  }
+  const [users,setUsers]=useState([{
+    name:"",
+    email:"",
+    password:""
+  }]);
+  const history = useHistory();
+  
+  
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    axios.get('http://localhost:4000/send').then((data)=>{setUsers(data)}).catch((err)=>console.log(err));
+    let c=0;
+    console.log(users.data);
+    if(users.data){
+    for(let i=0;i<users.data.length;i++){
+      if(users.data[i].email==logus.email && users.data[i].password==logus.password){
+        c+=1;
+      }
+    }
+    let v=0;
+    if(c>0){
+      toast.success("loggedIn successfully");
+      history.push('/home');
+    }
+    else{
+      toast.error("login credentials are not matching");
+    }
+  }
+  else{
+    toast.error("login credentials are not matching");
+  }
+    
+  }
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline/>
@@ -131,9 +187,10 @@ export default function Body() {
           </ul>  
           </div>  
       </Grid>
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Grid item xs={12} sm={12} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
         <div className={classes.ul2}>
+          <ToastContainer autoClose={2000} position={toast.POSITION.TOP_CENTER}/>
         <ul style={{
               display:'flex',
              textAlign:'center',
@@ -172,14 +229,16 @@ export default function Body() {
           }}>
             Sign in
           </Typography>
-          <form className={classes.form} noValidate>
+          
+          <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <CssTextField
               margin="normal"
               label="Email Address"
               variant="outlined"
               required
               fullWidth
-              id="email"
+              value={logus.email}
+              onChange={handleChange}
               label="Email Address"
               name="email"
               autoComplete="email"
@@ -193,7 +252,8 @@ export default function Body() {
               name="password"
               label="Password"
               type="password"
-              id="password"
+              value={logus.password}
+              onChange={handleChange}
               autoComplete="current-password"
             />
             <FormControlLabel
@@ -206,6 +266,7 @@ export default function Body() {
               variant="contained"
               style={{backgroundColor:'#10AFA6',color:'white'}}
               className={classes.submit}
+            
             >
               Sign In
             </Button>

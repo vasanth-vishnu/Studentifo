@@ -17,6 +17,7 @@ import Alert from '@material-ui/lab/Alert';
 import {ToastContainer,toast,Zoom,Bounce} from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { ZoomInRounded } from '@material-ui/icons';
+import axios from 'axios';
 
  
 function Copyright() {
@@ -116,21 +117,52 @@ export default function Register() {
   const [udetails,setUdetails]=useState({
     name:"",
     email:"",
-    pass:"",
-    cpass:""
+    password:""
   });
+  const handleChange=(e)=>{
+    const {name,value}=e.target;
+    setUdetails(prevUdetails=>{
+      return {
+        ...prevUdetails,
+        [name]:value
+      }
+    })
+
+  }
   const onSubmit=(e)=>{
     e.preventDefault();
     console.log("user registered");
-    console.log(e.target.uname.value);
+    console.log(e.target.name.value);
     console.log(e.target.email.value);
     console.log(e.target.password.value);
     console.log(e.target.cpassword.value);
-    if(e.target.password.value!== e.target.cpassword.value){
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    
+  if (udetails.password.length < 8) {
+    toast.error("Your password must be at least 8 characters"); 
+  }
+  else if (udetails.password.search(/[a-z]/i) < 0) {
+    toast.error("Your password must contain at least one letter.");
+   }
+   else if(re.test(udetails.email)==false){
+     toast.error("email is not valid");
+   }
+   else if (udetails.password.search(/[0-9]/) < 0) {
+    toast.error("Your password must contain at least one digit."); 
+   }
+    else if(e.target.password.value!== e.target.cpassword.value){
        toast.error("Passwords doesn't match");
     }
     else{
       toast.success("Registered successfully");
+       axios({
+         url:'http://localhost:4000/save',
+         method:'POST',
+         data:udetails
+       }).then(()=>{
+         console.log("data has been sent to the server");
+       })
+       .catch((err)=>{console.log(err)});
     }
   };
   
@@ -138,7 +170,7 @@ export default function Register() {
     <Grid container component="main" className={classes.root}>
       <CssBaseline/>
       
-      <Grid item xs={false} sm={4} md={7} className={classes.image}>
+      <Grid item xs={false} sm={12} md={12} className={classes.image}>
           <div className={classes.ul1}>
           <ul style={{
               display:'flex',
@@ -164,7 +196,7 @@ export default function Register() {
           </ul>  
           </div>  
       </Grid>
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square
+      <Grid item xs={12} sm={12} md={12} component={Paper} elevation={6} square
       style={{
           marginTop:'-60px'
       }}>
@@ -217,8 +249,9 @@ export default function Register() {
               variant="outlined"
               required
               fullWidth
-            
-              name="uname"
+               onChange={handleChange}
+               value={udetails.name}
+              name="name"
             />
             
             <CssTextField
@@ -227,7 +260,8 @@ export default function Register() {
               variant="outlined"
               required
               fullWidth
-              
+              onChange={handleChange}
+              value={udetails.email}
               label="Email Address"
               name="email"
             />
@@ -239,7 +273,8 @@ export default function Register() {
               name="password"
               label="Password"
               type="password"
-              
+              onChange={handleChange}
+              value={udetails.password}
               autoComplete="current-password"
             />
              <CssTextField
