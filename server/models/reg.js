@@ -14,6 +14,7 @@ const userSchema=new Schema({
         }
     }]
 });
+const Regu=mongoose.model('Regu',userSchema);
 userSchema.methods.generateAuthToken=async function(){
     const user=this
     const token=jwt.sign({_id: user._id.toString()},process.env.JWT_SECRET||'vasanth')
@@ -25,7 +26,7 @@ userSchema.methods.generateAuthToken=async function(){
     return token
 }
 userSchema.statics.findByCredentials=async (email,password)=>{
-    const user =await User.findOne({email})
+    const user =await Regu.findOne({email})
     if(!user){
         throw new Error('unable to login')
     }
@@ -50,5 +51,5 @@ userSchema.pre('save',async function(next){
 
     next()
 })
-const regus=mongoose.model("Reg",userSchema);
-module.exports=regus;
+
+module.exports=Regu;
