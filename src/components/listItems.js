@@ -11,13 +11,17 @@ import HomeIcon from '@material-ui/icons/Home';
 import SettingsIcon from '@material-ui/icons/Settings';
 import InfoIcon from '@material-ui/icons/Info';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
+import Avatar from '@material-ui/core/Avatar';
+import logus from './Body';
 export const mainListItems = (
   <div>
     <ListItem button>
       <ListItemIcon >
-        <AccountCircleIcon style={{color:'white'}}/>
+      <Avatar aria-label="recipe" style={{backgroundColor:'#008880'}}>
+            T
+          </Avatar>
       </ListItemIcon>
-      <ListItemText style={{color:'white'}} primary="Profile"/>
+      <ListItemText style={{color:'white'}} primary={logus.email}/>
     </ListItem>
     <ListItem button>
       <ListItemIcon>

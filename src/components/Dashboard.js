@@ -22,6 +22,8 @@ import HomeIcon from '@material-ui/icons/Home';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { mainListItems, secondaryListItems } from './listItems';
+import Main from './Main';
+import SimpleMenu from './Logout';
 
 
 function Copyright() {
@@ -109,12 +111,14 @@ const useStyles = makeStyles((theme) => ({
   container: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
+    minHeight: "100vh"
   },
   paper: {
     padding: theme.spacing(2),
     display: 'flex',
     overflow: 'auto',
     flexDirection: 'column',
+    minHeight: "100vh"
   },
   bdg:{
      
@@ -167,10 +171,8 @@ export default function Dashboard() {
               <SettingsIcon />
             </Badge>
             </IconButton>
-            <IconButton color="inherit">
-            <Badge badgeContent=" " color="" overlap="circle" variant="dot" style={{color:'#10AFA6'}}>
-              <ExitToAppIcon />
-            </Badge>
+          <IconButton color="inherit">
+            <SimpleMenu />
           </IconButton>
          
         </Toolbar>
@@ -195,15 +197,15 @@ export default function Dashboard() {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
+          <Grid container spacing={5}>
             {/* Chart */}
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>
-                
+                <Main/>
               </Paper>
             </Grid>
             {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={3}>
+            <Grid item xs={false} md={4} lg={3} style={{position:'sticky'}}>
               <Paper className={fixedHeightPaper}>
               
               </Paper>
