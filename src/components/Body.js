@@ -139,8 +139,8 @@ export default function Body() {
       method:'POST',
       data:logus
     }).then((data)=>{
-      console.log(data.data.name);
-      let c=data.data.cou;
+      console.log(data.data.name,data.data.token);
+      let c=0;
       if(c>0){
         toast.success("loggedIn successfully");
         history.push('/home');
@@ -255,15 +255,7 @@ export default function Body() {
               onChange={handleChange}
               autoComplete="current-password"
             />
-             <GoogleLogin
-                clientId="your-google-app-client-id.apps.googleusercontent.com"
-                render={renderProps => (
-                  <GoogleButton onClick={renderProps.onClick} disabled={renderProps.disabled}>Sign in with Google</GoogleButton>
-                )}
-                onSuccess={responseGoogleSuccess}
-                onFailure={responseGoogleFailure}
-                cookiePolicy={'single_host_origin'}
-              />
+           
             <Button
               type="submit"
               fullWidth
