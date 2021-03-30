@@ -17,6 +17,7 @@ import {ToastContainer,toast,Zoom,Bounce} from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import {useHistory} from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
+import {GoogleLogin} from 'react-google-login';
 
 function Copyright() {
   return (
@@ -116,6 +117,9 @@ export default function Body() {
     email:"",
     password:""
   });
+  const [uname,setUname]=useState({
+    name:""
+  });
   const handleChange=(e)=>{
     const{name,value}=e.target;
     setLogus((prevLogus)=>{
@@ -125,38 +129,30 @@ export default function Body() {
       }
     })
   }
-  const [users,setUsers]=useState([{
-    name:"",
-    email:"",
-    password:""
-  }]);
   const history = useHistory();
-  
-  
   const handleSubmit=(e)=>{
     e.preventDefault();
-    axios.get('http://localhost:4000/send').then((data)=>{setUsers(data)}).catch((err)=>console.log(err));
-    let c=0;
-    console.log(users.data);
-    if(users.data){
-    for(let i=0;i<users.data.length;i++){
-      if(users.data[i].email==logus.email && users.data[i].password==logus.password){
-        c+=1;
-      }
-    }
-    let v=0;
-    if(c>0){
-      toast.success("loggedIn successfully");
-      history.push('/home');
-    }
-    else{
-      toast.error("login credentials are not matching");
-    }
+    axios({
+      url:'http://localhost:4000/login',
+      method:'POST',
+      data:logus
+    }).then((data)=>{
+      
+        if(data.data.user){
+        toast.success("loggedIn successfully");
+        history.push('/home');}
+        else{
+          toast.error("login credentials are not matching");
+        }
+      
+    })
+    .catch((err)=>{console.log(err)});
+    var c=0;
+  
+  
   }
-  else{
-    toast.error("login credentials are not matching");
-  }
-    
+  const responseGoogle = (response) => {
+    console.log(response);
   }
   return (
     <Grid container component="main" className={classes.root}>
@@ -230,7 +226,7 @@ export default function Body() {
             Sign in
           </Typography>
           
-          <form className={classes.form} noValidate onSubmit={handleSubmit}>
+          <form className={classes.form}>
             <CssTextField
               margin="normal"
               label="Email Address"
@@ -256,20 +252,18 @@ export default function Body() {
               onChange={handleChange}
               autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="#10AFA6" />}
-              label="Remember me"
-            />
+           
             <Button
               type="submit"
               fullWidth
               variant="contained"
               style={{backgroundColor:'#10AFA6',color:'white'}}
               className={classes.submit}
-            
+              onClick={handleSubmit}
             >
               Sign In
             </Button>
+           
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2" style={{

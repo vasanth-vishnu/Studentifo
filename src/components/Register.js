@@ -18,6 +18,7 @@ import {ToastContainer,toast,Zoom,Bounce} from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { ZoomInRounded } from '@material-ui/icons';
 import axios from 'axios';
+import {useHistory} from 'react-router-dom';
 
  
 function Copyright() {
@@ -109,8 +110,8 @@ const useStyles = makeStyles((theme) => ({
       color:'white',
       width:'100%'
   },
-
 }));
+
 
 export default function Register() {
   const classes = useStyles();
@@ -119,6 +120,7 @@ export default function Register() {
     email:"",
     password:""
   });
+  const history = useHistory();
   const handleChange=(e)=>{
     const {name,value}=e.target;
     setUdetails(prevUdetails=>{
@@ -161,6 +163,7 @@ export default function Register() {
          data:udetails
        }).then(()=>{
          console.log("data has been sent to the server");
+         history.push("/")
        })
        .catch((err)=>{console.log(err)});
     }
