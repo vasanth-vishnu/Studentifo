@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 import { Card } from "@material-ui/core"
 import BlogCard from './Blog';
 import Link from '@material-ui/core/Link';
 
+=======
+>>>>>>> af69d900c0b8028531c06fd5604141e61167cd44
 const Main = () => {
     return ( 
         <div className="cont">
@@ -16,6 +19,7 @@ const Main = () => {
             </div>
             <div className="blog">
                 <h2 style={{color:'#10AFA6'}}>Blogs</h2>
+<<<<<<< HEAD
                 <div style={{border:'1px solid grey'}}>
                    <BlogCard/>
                 </div>
@@ -43,6 +47,12 @@ const Main = () => {
                     and gothrough the instructions mentioned below and act accordingly to perform your activities
                     this also displays blogs of different users and this is one way to spread and gain knowledge
                 </p>
+=======
+                <div style={{border:'1px solid black'}}>
+                    <h4 style={{fontSize:'20px'}}>The D Day !!</h4>
+                    <h6>written by <span>T Vasanth</span></h6>
+                </div>
+>>>>>>> af69d900c0b8028531c06fd5604141e61167cd44
             </div>
         </div>
     );

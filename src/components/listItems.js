@@ -13,7 +13,10 @@ import InfoIcon from '@material-ui/icons/Info';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import Avatar from '@material-ui/core/Avatar';
 import logus from './Body';
+<<<<<<< HEAD
 import Link from '@material-ui/core/Link';
+=======
+>>>>>>> af69d900c0b8028531c06fd5604141e61167cd44
 export const mainListItems = (
   <div>
     <ListItem button>
@@ -24,7 +27,10 @@ export const mainListItems = (
           </Avatar>
       </ListItemIcon>
       <ListItemText style={{color:'white'}} primary={logus.email}/>
+<<<<<<< HEAD
       </Link>
+=======
+>>>>>>> af69d900c0b8028531c06fd5604141e61167cd44
     </ListItem>
     <ListItem button>
       <ListItemIcon>

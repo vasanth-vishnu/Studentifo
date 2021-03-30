@@ -24,9 +24,12 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { mainListItems, secondaryListItems } from './listItems';
 import Main from './Main';
 import SimpleMenu from './Logout';
+<<<<<<< HEAD
 import {BrowserRouter as Router,Route} from 'react-router-dom';
 import AllBlogs from './AllBlogs';
 import Resume from './Resume';
+=======
+>>>>>>> af69d900c0b8028531c06fd5604141e61167cd44
 
 
 function Copyright() {
@@ -204,7 +207,11 @@ export default function Dashboard() {
             {/* Chart */}
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>
+<<<<<<< HEAD
                 <Resume />
+=======
+                <Main/>
+>>>>>>> af69d900c0b8028531c06fd5604141e61167cd44
               </Paper>
             </Grid>
             {/* Recent Deposits */}

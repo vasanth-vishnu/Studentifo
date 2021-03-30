@@ -137,6 +137,7 @@ export default function Body() {
       method:'POST',
       data:logus
     }).then((data)=>{
+<<<<<<< HEAD
 
         if(data.data.user){
         toast.success("loggedIn successfully");
@@ -153,7 +154,26 @@ export default function Body() {
   }
   const responseGoogle = (response) => {
     console.log(response);
+=======
+      console.log(data.data.name,data.data.token);
+      let c=0;
+      if(c>0){
+        toast.success("loggedIn successfully");
+        history.push('/home');
+      }
+      else{
+        toast.error("login credentials are not matching");
+      }
+    })
+    .catch((err)=>{console.log(err)});
+    console.log(uname);
+    
+>>>>>>> af69d900c0b8028531c06fd5604141e61167cd44
   }
+  const responseGoogle = (response) => {
+    console.log(response);
+  }
+  
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline/>
