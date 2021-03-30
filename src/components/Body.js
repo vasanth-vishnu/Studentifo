@@ -137,7 +137,7 @@ export default function Body() {
       method:'POST',
       data:logus
     }).then((data)=>{
-      
+
         if(data.data.user){
         toast.success("loggedIn successfully");
         history.push('/home');}
@@ -241,7 +241,7 @@ export default function Body() {
               autoFocus
             />
             <CssTextField
-              variant="outlined"
+              variant="outlined" 
               margin="normal"
               required
               fullWidth
